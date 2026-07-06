@@ -29,6 +29,7 @@ class GuestController extends Controller
 
         if ($pegawai) {
             $no_wa_bos = $pegawai->no_wa;
+            // Pastikan nomor WA diawali dengan 62
             if (str_starts_with($no_wa_bos, '0')) {
                 $no_wa_bos = '62' . substr($no_wa_bos, 1);
             }
@@ -47,14 +48,20 @@ class GuestController extends Controller
             
             $data_foto = $kunjungan->foto_selfie;
 
-            try {
-                Http::post('http://localhost:3000/api/send', [
-                    'phone' => $no_wa_bos,
-                    'message' => $pesan,
-                    'photoData' => $data_foto
-                ]);
-            } catch (\Exception $e) {
-                // Biarkan kosong
+            // KUNCI UTAMA: Mengambil link Ngrok dari Vercel Environment Variables
+            $botUrl = env('BOT_WA_URL');
+
+            if ($botUrl) {
+                try {
+                    // Tembak pesan ke Node.js lokal via Ngrok
+                    Http::timeout(5)->post($botUrl, [
+                        'phone' => $no_wa_bos,
+                        'message' => $pesan,
+                        'photoData' => $data_foto
+                    ]);
+                } catch (\Exception $e) {
+                    \Illuminate\Support\Facades\Log::error("Gagal nembak ke Ngrok: " . $e->getMessage());
+                }
             }
         }
 
