@@ -46,24 +46,28 @@ class GuestController extends Controller
             $pesan .= "*3* - Tidak Bisa Ditemui\n\n";
             $pesan .= "_Sistem Buku Tamu Pelindo_";
             
-            $data_foto = $kunjungan->foto_selfie;
+           $data_foto = $kunjungan->foto_selfie;
 
-            // KUNCI UTAMA: Mengambil link Ngrok dari Vercel Environment Variables
-            $botUrl = env('https://2214-182-1-33-214.ngrok-free.app/api/send');
-
+            // 1. HARDCODE SEMENTARA
+            $botUrl = "https://2214-182-1-33-214.ngrok-free.app/api/send"; 
+            
             if ($botUrl) {
                 try {
-                    // Tembak pesan ke Node.js lokal via Ngrok
-                    Http::timeout(5)->post($botUrl, [
+                    // 2. TAMBAHKAN HEADER ANTI-BLOKIR NGROK
+                    Http::withHeaders([
+                        'ngrok-skip-browser-warning' => '69420'
+                    ])->timeout(10)->post($botUrl, [
                         'phone' => $no_wa_bos,
                         'message' => $pesan,
-                        'photoData' => $data_foto
+                        // Kita matikan pengiriman foto sementara biar prosesnya sangat ringan!
+                        // 'photoData' => $data_foto 
                     ]);
                 } catch (\Exception $e) {
-                    \Illuminate\Support\Facades\Log::error("Gagal nembak ke Ngrok: " . $e->getMessage());
+                    // 3. PAKSA TAMPILKAN ERROR KE LAYAR JIKA GAGAL! (JANGAN DISEMBUNYIKAN)
+                    dd("VERCEL GAGAL NEMBAK KE NGROK BRO! INI ALASANNYA:", $e->getMessage());
                 }
             }
-        }
+        } // penutup dari if ($pegawai)
 
         return redirect()->route('guest.waiting', $kunjungan->id);
     }
