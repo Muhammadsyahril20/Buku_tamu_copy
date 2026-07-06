@@ -49,7 +49,7 @@ class GuestController extends Controller
             $data_foto = $kunjungan->foto_selfie;
 
             // KUNCI UTAMA: Mengambil link Ngrok dari Vercel Environment Variables
-            $botUrl = env('BOT_WA_URL');
+            $botUrl = env('https://2214-182-1-33-214.ngrok-free.app/api/send');
 
             if ($botUrl) {
                 try {
