@@ -177,12 +177,16 @@ class AdminController extends Controller
 
         $data = $request->all();
 
-        // Proses Foto Dokumen jika ada yang diupload
+     // Proses Foto Dokumen (Ubah ke Base64 agar anti-error di Vercel)
         if ($request->hasFile('foto_dokumen')) {
-            // Karena kamu pakai Cloudinary/Storage, sesuaikan script uploadmu di sini.
-            // Contoh simpel jika pakai storage lokal:
-            $path = $request->file('foto_dokumen')->store('surat_masuk', 'public');
-            $data['foto_dokumen'] = $path;
+            $file = $request->file('foto_dokumen');
+            
+            // Ubah gambar menjadi teks panjang (Base64)
+            $base64 = base64_encode(file_get_contents($file));
+            $mime = $file->getClientMimeType();
+            
+            // Simpan format Base64 ke dalam array $data
+            $data['foto_dokumen'] = 'data:' . $mime . ';base64,' . $base64;
         }
 
         SuratMasuk::create($data);
