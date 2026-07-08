@@ -153,7 +153,7 @@
             Reset
         </a>
     </div>
-</form>
+</form> 
                     <div class="flex space-x-2 w-full md:w-auto">
                         <a href="{{ route('admin.surat.excel') }}" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-4 rounded shadow-sm transition-all"><i class="fa-solid fa-file-excel mr-1"></i> Excel</a>
                         <a href="{{ route('admin.surat.pdf') }}" class="flex-1 text-center bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold py-2 px-4 rounded shadow-sm transition-all"><i class="fa-solid fa-file-pdf mr-1"></i> PDF</a>
