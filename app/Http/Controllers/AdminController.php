@@ -237,11 +237,13 @@ class AdminController extends Controller
     }
 
     // --- FUNGSI EXPORT PDF (REKAP SURAT) ---
+    // --- FUNGSI EXPORT PDF (REKAP SURAT) ---
     public function exportSuratPdf()
     {
         $surats = SuratMasuk::latest()->get();
-        $pdf = Pdf::loadView('admin.surat-pdf-rekap', compact('surats'))->setPaper('a4', 'landscape');
-        return $pdf->download('Rekap_Surat_Masuk_' . date('Ymd') . '.pdf');
+        
+        // Buang DOMPDF, langsung return ke view blade-nya
+        return view('admin.surat-pdf-rekap', compact('surats'));
     }
 
     // --- FUNGSI CETAK BUKTI PER SURAT ---
