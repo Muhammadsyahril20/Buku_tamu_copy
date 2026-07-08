@@ -10,6 +10,7 @@ use Carbon\Carbon; // <--- INI OBAT UNTUK ERROR-NYA BRO!
 use App\Models\SuratMasuk;
 
 
+
 class AdminController extends Controller
 {
     // Menampilkan halaman Dashboard Utama
@@ -254,5 +255,34 @@ class AdminController extends Controller
         // Langsung tampilkan view blade-nya, biarkan Google Chrome yang urus PDF-nya
         return view('admin.surat-pdf-single', compact('surat')); 
     }
+public function halamanLogSurat(Request $request)
+{
+    // 1. Siapkan Query Dasar
+    $query = SuratMasuk::query();
 
+    // 2. Jika ada inputan pencarian teks (Cari Pengirim / Instansi / Perihal)
+    if ($request->has('cari') && $request->cari != '') {
+        $cari = $request->cari;
+        $query->where(function($q) use ($cari) {
+            $q->where('nama_pengirim', 'like', '%' . $cari . '%')
+              ->orWhere('instansi', 'like', '%' . $cari . '%')
+              ->orWhere('perihal', 'like', '%' . $cari . '%');
+        });
+    }
+
+    // 3. Jika ada inputan filter rentang tanggal (Mulai s/d Selesai)
+    if ($request->has('tgl_awal') && $request->tgl_awal != '' && $request->has('tgl_akhir') && $request->tgl_akhir != '') {
+        // Tambahkan jam agar mencakup 1 hari penuh
+        $awal = $request->tgl_awal . ' 00:00:00';
+        $akhir = $request->tgl_akhir . ' 23:59:59';
+        
+        $query->whereBetween('created_at', [$awal, $akhir]);
+    }
+
+    // 4. Eksekusi query-nya (Urutkan dari yang paling baru)
+    $surats = $query->latest()->get(); 
+    // Catatan: Kalau pakai pagination, ganti ->get() jadi ->paginate(10)->withQueryString()
+
+    return view('admin.nama-file-blade-kamu', compact('surats'));
+}
 }

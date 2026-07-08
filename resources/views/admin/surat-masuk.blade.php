@@ -123,6 +123,37 @@
             <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-10">
                 <div class="p-4 border-b border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 bg-gray-50">
                     <h3 class="font-bold text-gray-800"><i class="fa-solid fa-list text-blue-600 mr-2"></i> Log Surat Masuk</h3>
+                    <form action="" method="GET" class="mb-6 bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row gap-4 items-end">
+    
+    <div class="w-full md:w-1/3">
+        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Cari Kata Kunci</label>
+        <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                <i class="fa-solid fa-search"></i>
+            </span>
+            <input type="text" name="cari" value="{{ request('cari') }}" placeholder="Pengirim, Instansi, Perihal..." class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+        </div>
+    </div>
+
+    <div class="w-full md:w-2/5">
+        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Filter Tanggal Masuk</label>
+        <div class="flex items-center gap-2">
+            <input type="date" name="tgl_awal" value="{{ request('tgl_awal') }}" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-blue-500 outline-none">
+            <span class="text-gray-400 font-bold">-</span>
+            <input type="date" name="tgl_akhir" value="{{ request('tgl_akhir') }}" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-blue-500 outline-none">
+        </div>
+    </div>
+
+    <div class="flex gap-2 w-full md:w-auto">
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md transition-all flex items-center gap-2">
+            Filter Data
+        </button>
+        
+        <a href="{{ request()->url() }}" class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm font-bold border border-gray-300 transition-all flex items-center gap-2">
+            Reset
+        </a>
+    </div>
+</form>
                     <div class="flex space-x-2 w-full md:w-auto">
                         <a href="{{ route('admin.surat.excel') }}" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-4 rounded shadow-sm transition-all"><i class="fa-solid fa-file-excel mr-1"></i> Excel</a>
                         <a href="{{ route('admin.surat.pdf') }}" class="flex-1 text-center bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold py-2 px-4 rounded shadow-sm transition-all"><i class="fa-solid fa-file-pdf mr-1"></i> PDF</a>
