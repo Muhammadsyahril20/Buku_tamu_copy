@@ -107,6 +107,16 @@
                     <button type="button" onclick="submitFormSurat()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all">
                         <i class="fa-solid fa-save mr-2"></i> Simpan Data & Tanda Tangan
                     </button>
+                    @if ($errors->any())
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded shadow-sm">
+        <p class="font-bold">Wah, ada yang salah bro:</p>
+        <ul class="list-disc ml-5 mt-2 text-sm">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 </form>
             </div>
 
