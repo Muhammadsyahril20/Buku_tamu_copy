@@ -49,7 +49,7 @@ class GuestController extends Controller
            $data_foto = $kunjungan->foto_selfie;
 
             // 1. HARDCODE SEMENTARA
-            $botUrl = "https://2214-182-1-33-214.ngrok-free.app/api/send"; 
+            $botUrl = env('BOT_WA_URL'); 
             
             if ($botUrl) {
                 try {
