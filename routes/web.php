@@ -51,3 +51,12 @@ Route::get('/api/cek-status/{id}', [\App\Http\Controllers\GuestController::class
 
 Route::get('/cek-status-tamu/{id}', [GuestController::class, 'checkStatus']);
 Route::get('/webhook-wa-bot', [GuestController::class, 'handleWebhook']);
+// RUTE HACK UNTUK MEMAKSA DATABASE BERUBAH
+Route::get('/fix-db', function () {
+    try {
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE kunjungans MODIFY COLUMN status VARCHAR(255) DEFAULT 'Menunggu'");
+        return 'MANTAP BOS! Database sukses dibongkar paksa jadi VARCHAR!';
+    } catch (\Exception $e) {
+        return 'GAGAL BRO: ' . $e->getMessage();
+    }
+});
