@@ -60,3 +60,12 @@ Route::get('/fix-db', function () {
         return 'GAGAL BRO: ' . $e->getMessage();
     }
 });
+// RUTE HACK UNTUK MEMAKSA DATABASE SURAT MASUK
+Route::get('/fix-db-surat', function () {
+    try {
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE surat_masuks MODIFY COLUMN foto_dokumen LONGTEXT, MODIFY COLUMN ttd_pengirim LONGTEXT, MODIFY COLUMN ttd_penerima LONGTEXT");
+        return 'MANTAP BOS! Database Surat Masuk sukses dibongkar paksa jadi LONGTEXT beneran!';
+    } catch (\Exception $e) {
+        return 'GAGAL BRO: ' . $e->getMessage();
+    }
+});
