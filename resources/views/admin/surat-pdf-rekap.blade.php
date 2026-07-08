@@ -21,8 +21,17 @@
         .sig-name { font-size: 9px; font-weight: bold; }
         .sig-title { font-size: 8px; color: #777; font-weight: bold; text-transform: uppercase; }
     </style>
+    <style>
+    /* Mengatur ukuran standar kertas A4 */
+    @page { size: A4; margin: 15mm; }
+    
+    /* Sembunyikan elemen yang tidak perlu saat di-print (contoh tombol kembali) */
+    @media print {
+        .sembunyikan-saat-print { display: none !important; }
+    }
+</style>
 </head>
-<body>
+<body onload="window.print()">
     <div class="header">
         <h2>Laporan Rekapitulasi Surat Masuk</h2>
         <p>PT Pelabuhan Indonesia (Persero) Regional 1 Dumai</p>
@@ -74,5 +83,6 @@
             @endforelse
         </tbody>
     </table>
+    
 </body>
 </html>

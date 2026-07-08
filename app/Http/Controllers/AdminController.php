@@ -245,11 +245,19 @@ class AdminController extends Controller
     }
 
     // --- FUNGSI CETAK BUKTI PER SURAT ---
+    // --- FUNGSI CETAK BUKTI PER SURAT ---
     public function printSuratSingle($id)
     {
-        $surat = SuratMasuk::findOrFail($id);
-        $pdf = Pdf::loadView('admin.surat-pdf-single', compact('surat'))->setPaper('a4', 'portrait');
-        return $pdf->stream('Tanda_Bukti_Surat_' . $surat->id . '.pdf'); // Pakai stream agar bisa dilihat dulu sebelum didownload
+        $surat = SuratMasuk::findOrFail($id); 
+        // Nama variabel $surat sesuaikan dengan kodingan aslimu ya
+
+        // HAPUS ATAU JADIKAN KOMENTAR KODINGAN DOMPDF INI:
+        // $pdf = PDF::loadView('nama.view', compact('surat'));
+        // return $pdf->stream();
+
+        // GANTI MENJADI SEPERTI INI: (Langsung tampilkan halamannya)
+        return view('nama.folder.view.print.kamu', compact('surat')); 
+        // (Pastikan nama view-nya sesuai dengan file blade print kamu)
     }
 
 }
