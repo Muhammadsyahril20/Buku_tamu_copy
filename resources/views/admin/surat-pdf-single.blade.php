@@ -91,6 +91,21 @@
     <div class="footer">
         Dicetak secara otomatis dari Sistem Informasi Buku Tamu Digital Pelindo Regional 1 Dumai pada {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}.
     </div>
+    @if($surat->foto_dokumen)
+        
+        <div style="page-break-before: always;"></div>
+
+        <div style="width: 100%; margin-top: 20px; font-family: sans-serif; text-align: center;">
+            <div style="border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px;">
+                <h3 style="margin: 0; font-size: 16px; color: #333; text-transform: uppercase;">
+                    Lampiran Bukti Dokumen Surat
+                </h3>
+            </div>
+            
+            <img src="{{ $surat->foto_dokumen }}" alt="Lampiran Surat" style="max-width: 100%; max-height: 900px; object-fit: contain; border: 1px solid #ddd; padding: 5px; border-radius: 8px;">
+        </div>
+        
+    @endif
 
 </body>
 </html>
