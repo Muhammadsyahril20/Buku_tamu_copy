@@ -29,7 +29,7 @@
         .footer { clear: both; margin-top: 50px; font-size: 10px; color: #555; text-align: center; border-top: 1px dashed #ccc; padding-top: 10px; }
     </style>
 </head>
-<body>
+<body onload="window.print()">
 
     <table class="header-table">
         <tr>
