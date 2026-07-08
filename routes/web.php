@@ -46,5 +46,8 @@ Route::get('/tamu', [GuestController::class, 'showForm'])->name('guest.form');
 Route::post('/tamu/submit', [GuestController::class, 'submitForm'])->name('guest.submit');
 Route::get('/tamu/menunggu/{id}', [GuestController::class, 'waitingRoom'])->name('guest.waiting');
 Route::get('/api/cek-status/{id}', [GuestController::class, 'checkStatus']);
+// Pastikan ada tulisan 'api/' di depannya agar sesuai dengan yang dipanggil JavaScript halaman tamu
+Route::get('/api/cek-status/{id}', [\App\Http\Controllers\GuestController::class, 'checkStatus']);
 
-Route::get('/api/webhook-wa', [GuestController::class, 'handleWebhook']);
+Route::get('/cek-status-tamu/{id}', [GuestController::class, 'checkStatus']);
+Route::get('/webhook-wa-bot', [GuestController::class, 'handleWebhook']);

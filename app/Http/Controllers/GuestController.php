@@ -60,7 +60,7 @@ class GuestController extends Controller
                         'phone' => $no_wa_bos,
                         'message' => $pesan,
                         // Kita matikan pengiriman foto sementara biar prosesnya sangat ringan!
-                        // 'photoData' => $data_foto 
+                        'photoData' => $data_foto 
                     ]);
                 } catch (\Exception $e) {
                     // 3. PAKSA TAMPILKAN ERROR KE LAYAR JIKA GAGAL! (JANGAN DISEMBUNYIKAN)

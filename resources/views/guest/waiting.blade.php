@@ -60,7 +60,7 @@
         const kunjunganId = {{ $kunjungan->id }};
         
         function cekStatusTerbaru() {
-            fetch(`/api/cek-status/${kunjunganId}`)
+            fetch(`/cek-status-tamu/${kunjunganId}`)
                 .then(response => response.json())
                 .then(data => {
                     // Jika status di database BUKAN 'Menunggu' lagi
