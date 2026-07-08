@@ -77,45 +77,44 @@
                         
                         resultBox.classList.remove('hidden');
 
-                        // Ganti Tampilan Berdasarkan Jawaban Bos
-                        if (data.status === 'Silahkan Ditemui') {
-                            iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-emerald-100 text-emerald-600 border-4 border-emerald-50";
-                            statusIcon.className = "fa-solid fa-check";
-                            statusTitle.innerText = "AKSES DIIZINKAN";
-                            statusTitle.className = "text-2xl font-black tracking-tight text-emerald-600";
-                            statusDesc.innerText = "Bapak/Ibu bersedia menemui Anda. Silakan menuju ke ruang tunggu utama.";
-                        } 
-                        else if (data.status === 'Sedang Rapat') {
-                            iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-amber-100 text-amber-600 border-4 border-amber-50";
-                            statusIcon.className = "fa-solid fa-clock-rotate-left";
-                            statusTitle.innerText = "MOHON MENUNGGU";
-                            statusTitle.className = "text-2xl font-black tracking-tight text-amber-600";
-                            statusDesc.innerText = "Saat ini Pejabat yang dituju sedang dalam rapat. Mohon tunggu sejenak di area resepsionis.";
-                        } 
-                        else if (data.status === 'Tidak Bisa Ditemui') {
-                            iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-rose-100 text-rose-600 border-4 border-rose-50";
-                            statusIcon.className = "fa-solid fa-xmark";
-                            statusTitle.innerText = "AKSES DITOLAK";
-                            statusTitle.className = "text-2xl font-black tracking-tight text-rose-600";
-                            statusDesc.innerText = "Mohon maaf, saat ini beliau tidak dapat ditemui karena ada agenda mendesak.";
-                        }
-                        else if (data.status === 'Sedang Dinas') {
-                            iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-blue-100 text-blue-600 border-4 border-blue-50";
-                            statusIcon.className = "fa-solid fa-briefcase"; 
-                            statusTitle.innerText = "SEDANG DINAS";
-                            statusTitle.className = "text-2xl font-black tracking-tight text-blue-600";
-                            statusDesc.innerText = "Mohon maaf, Pejabat yang dituju saat ini sedang melaksanakan Dinas Luar.";
-                        }
-                        // ==========================================
-                        // TAMBAHAN BARU: SEDANG CUTI (Warna Ungu)
-                        // ==========================================
-                        else if (data.status === 'Sedang Cuti') {
-                            iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-purple-100 text-purple-600 border-4 border-purple-50";
-                            statusIcon.className = "fa-solid fa-calendar-xmark"; 
-                            statusTitle.innerText = "SEDANG CUTI";
-                            statusTitle.className = "text-2xl font-black tracking-tight text-purple-600";
-                            statusDesc.innerText = "Mohon maaf, Pejabat yang dituju saat ini sedang dalam masa Cuti.";
-                        }
+                       // Ganti Tampilan Berdasarkan Jawaban Bos (Versi Anti-Gagal Huruf Besar-Kecil)
+const statusBersih = data.status.toLowerCase().trim();
+
+if (statusBersih === 'silahkan ditemui') {
+    iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-emerald-100 text-emerald-600 border-4 border-emerald-50";
+    statusIcon.className = "fa-solid fa-check";
+    statusTitle.innerText = "AKSES DIIZINKAN";
+    statusTitle.className = "text-2xl font-black tracking-tight text-emerald-600";
+    statusDesc.innerText = "Bapak/Ibu bersedia menemui Anda. Silakan menuju ke ruang tunggu utama.";
+} 
+else if (statusBersih === 'sedang rapat') {
+    iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-amber-100 text-amber-600 border-4 border-amber-50";
+    statusIcon.className = "fa-solid fa-clock-rotate-left";
+    statusTitle.innerText = "MOHON MENUNGGU";
+    statusTitle.className = "text-2xl font-black tracking-tight text-amber-600";
+    statusDesc.innerText = "Saat ini Pejabat yang dituju sedang dalam rapat. Mohon tunggu sejenak di area resepsionis.";
+} 
+else if (statusBersih === 'tidak bisa ditemui') {
+    iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-rose-100 text-rose-600 border-4 border-rose-50";
+    statusIcon.className = "fa-solid fa-xmark";
+    statusTitle.innerText = "AKSES DITOLAK";
+    statusTitle.className = "text-2xl font-black tracking-tight text-rose-600";
+    statusDesc.innerText = "Mohon maaf, saat ini beliau tidak dapat ditemui karena ada agenda mendesak.";
+}
+else if (statusBersih === 'sedang dinas') {
+    iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-blue-100 text-blue-600 border-4 border-blue-50";
+    statusIcon.className = "fa-solid fa-briefcase"; 
+    statusTitle.innerText = "SEDANG DINAS";
+    statusTitle.className = "text-2xl font-black tracking-tight text-blue-600";
+    statusDesc.innerText = "Mohon maaf, Pejabat yang dituju saat ini sedang melaksanakan Dinas Luar.";
+}
+else if (statusBersih === 'sedang cuti') {
+    iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-purple-100 text-purple-600 border-4 border-purple-50";
+    statusIcon.className = "fa-solid fa-calendar-times"; // Pakai ikon universal FontAwesome lama biar aman
+    statusTitle.innerText = "SEDANG CUTI";
+    statusTitle.className = "text-2xl font-black tracking-tight text-purple-600";
+    statusDesc.innerText = "Mohon maaf, Pejabat yang dituju saat ini sedang dalam masa Cuti.";
+}
                     }
                 })
                 .catch(error => console.error('Error fetching status:', error));
