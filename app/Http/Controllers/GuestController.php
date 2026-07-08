@@ -43,7 +43,9 @@ class GuestController extends Controller
             $pesan .= "⚠️ *Mohon berikan balasan (ketik angkanya saja):*\n";
             $pesan .= "*1* - Silakan Ditemui\n";
             $pesan .= "*2* - Sedang Rapat\n";
-            $pesan .= "*3* - Tidak Bisa Ditemui\n\n";
+            $pesan .= "*3* - Tidak Bisa Ditemui\n";
+            $pesan .= "*4* - Sedang Dinas\n"; // <-- TAMBAHAN BARU
+            $pesan .= "*5* - Sedang Cuti\n\n";
             $pesan .= "_Sistem Buku Tamu Pelindo_";
             
            $data_foto = $kunjungan->foto_selfie;
@@ -119,12 +121,17 @@ class GuestController extends Controller
         }
 
         // Ubah Status sesuai angka
+       // Ubah Status sesuai angka
         if ($reply == '1') {
             $kunjungan->status = 'Silahkan Ditemui';
         } elseif ($reply == '2') {
             $kunjungan->status = 'Sedang Rapat';
         } elseif ($reply == '3') {
             $kunjungan->status = 'Tidak Bisa Ditemui';
+        } elseif ($reply == '4') { // <-- TAMBAHAN BARU
+            $kunjungan->status = 'Sedang Dinas';
+        } elseif ($reply == '5') { // <-- TAMBAHAN BARU
+            $kunjungan->status = 'Sedang Cuti';
         }
 
         $kunjungan->save();
