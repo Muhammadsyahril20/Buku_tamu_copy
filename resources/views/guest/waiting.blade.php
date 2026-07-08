@@ -99,6 +99,23 @@
                             statusTitle.className = "text-2xl font-black tracking-tight text-rose-600";
                             statusDesc.innerText = "Mohon maaf, saat ini beliau tidak dapat ditemui karena ada agenda mendesak.";
                         }
+                        else if (data.status === 'Sedang Dinas') {
+                            iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-blue-100 text-blue-600 border-4 border-blue-50";
+                            statusIcon.className = "fa-solid fa-briefcase"; 
+                            statusTitle.innerText = "SEDANG DINAS";
+                            statusTitle.className = "text-2xl font-black tracking-tight text-blue-600";
+                            statusDesc.innerText = "Mohon maaf, Pejabat yang dituju saat ini sedang melaksanakan Dinas Luar.";
+                        }
+                        // ==========================================
+                        // TAMBAHAN BARU: SEDANG CUTI (Warna Ungu)
+                        // ==========================================
+                        else if (data.status === 'Sedang Cuti') {
+                            iconContainer.className = "mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg mb-4 bg-purple-100 text-purple-600 border-4 border-purple-50";
+                            statusIcon.className = "fa-solid fa-calendar-xmark"; 
+                            statusTitle.innerText = "SEDANG CUTI";
+                            statusTitle.className = "text-2xl font-black tracking-tight text-purple-600";
+                            statusDesc.innerText = "Mohon maaf, Pejabat yang dituju saat ini sedang dalam masa Cuti.";
+                        }
                     }
                 })
                 .catch(error => console.error('Error fetching status:', error));
