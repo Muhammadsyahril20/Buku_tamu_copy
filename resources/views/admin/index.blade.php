@@ -12,7 +12,7 @@
         <!-- SIDEBAR -->
         <div class="w-64 bg-white border-r border-gray-200 p-6 flex flex-col shadow-sm z-10">
             <div class="mb-10 text-center">
-                <img src="{{ asset('assets/logo_pelindo.png') }}" alt="Logo Pelindo" class=" h-10 mx-auto mb-2">
+                <img src="{{ asset('images/logo-pelindo.png') }}" alt="Logo Pelindo" style="width: 150px; height: auto;">
                 <p class="text-xs text-gray-500 uppercase tracking-widest mt-1 font-semibold">Regional 1 Dumai</p>
             </div>
             
